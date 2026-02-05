@@ -4,7 +4,8 @@ import { useTranslation } from '../locales/translations';
 import {
   Zap, Target, ArrowRight, Check,
   FileText, Mail, Video, Linkedin, Instagram,
-  Twitter, Megaphone, ChevronDown, UserPlus, Layers, PenTool
+  Twitter, Megaphone, ChevronDown, UserPlus, Layers, PenTool,
+  Star, Shield
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -97,233 +98,271 @@ function LandingPage() {
     { name: 'Publicité', icon: Megaphone, color: '#F59E0B' }
   ];
 
+  const testimonials = language === 'fr' ? [
+    { name: 'Sophie M.', role: 'Content Manager', text: "J'utilise l'outil depuis 2 mois et la qualité des posts générés est vraiment au-dessus de ce que je faisais avec ChatGPT. Le gain de temps est réel.", rating: 5 },
+    { name: 'Thomas L.', role: 'Freelance Marketing', text: "Le fait de pouvoir générer pour plusieurs plateformes en un clic, c'est exactement ce qui me manquait. Je recommande.", rating: 5 },
+    { name: 'Julie R.', role: 'Community Manager', text: "Les hooks générés sont pertinents et les structures de posts correspondent bien aux codes de chaque réseau. Bon rapport qualité/prix.", rating: 4 },
+    { name: 'Marc D.', role: 'Entrepreneur', text: "Outil simple et efficace. Je l'utilise principalement pour LinkedIn et les emails. Les résultats sont convaincants.", rating: 5 },
+    { name: 'Léa B.', role: 'Social Media Manager', text: "Enfin un outil qui comprend la différence entre un post LinkedIn et un caption Instagram. Les 4 tons disponibles couvrent bien les besoins.", rating: 4 },
+    { name: 'Antoine P.', role: 'CEO Startup', text: "On a intégré l'outil dans notre workflow d'équipe. La fonctionnalité team est pratique et les crédits partagés simplifient la gestion.", rating: 5 }
+  ] : [
+    { name: 'Sophie M.', role: 'Content Manager', text: "I've been using the tool for 2 months and the quality of generated posts is really above what I was doing with ChatGPT. The time savings are real.", rating: 5 },
+    { name: 'Thomas L.', role: 'Freelance Marketer', text: "Being able to generate for multiple platforms in one click is exactly what I was missing. I recommend it.", rating: 5 },
+    { name: 'Julie R.', role: 'Community Manager', text: "The generated hooks are relevant and post structures match each network's codes well. Good value for money.", rating: 4 },
+    { name: 'Marc D.', role: 'Entrepreneur', text: "Simple and effective tool. I mainly use it for LinkedIn and emails. Results are convincing.", rating: 5 },
+    { name: 'Lea B.', role: 'Social Media Manager', text: "Finally a tool that understands the difference between a LinkedIn post and an Instagram caption. The 4 available tones cover needs well.", rating: 4 },
+    { name: 'Antoine P.', role: 'Startup CEO', text: "We integrated the tool into our team workflow. The team feature is practical and shared credits simplify management.", rating: 5 }
+  ];
+
   return (
     <div className="bg-white">
-      {/* Hero Section */}
+      {/* ==================== HERO ==================== */}
       <section className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-28">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left Content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24 lg:pt-28 lg:pb-32">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Left */}
             <div>
-              {/* Small tag */}
-              <div className="inline-flex items-center gap-2 bg-orange-50 text-orange-600 text-sm font-medium px-4 py-2 rounded-full mb-8">
-                <Zap className="h-4 w-4" />
+              <div className="inline-flex items-center gap-2 bg-orange-50 text-orange-600 text-sm font-medium px-4 py-2 rounded-full mb-8 border border-orange-100">
+                <Zap className="h-3.5 w-3.5" />
                 {t.landing.hero.badge}
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold text-gray-900 leading-[1.1] tracking-tight mb-6">
+              <h1 className="text-[2.5rem] sm:text-5xl lg:text-[3.5rem] font-extrabold text-gray-900 leading-[1.1] tracking-tight">
                 {t.landing.hero.title1}{' '}
                 <span className="text-orange-500">{t.landing.hero.title2}</span>{' '}
                 {t.landing.hero.title3}
               </h1>
 
-              <p className="text-lg text-gray-500 leading-relaxed mb-8 max-w-lg">
+              <p className="mt-6 text-lg text-gray-500 leading-relaxed max-w-lg">
                 {t.landing.hero.subtitle}
                 <span className="text-gray-900 font-medium">{t.landing.hero.subtitleBold}</span>
               </p>
 
               {/* Stats row */}
-              <div className="flex gap-8 mb-8">
-                <div>
-                  <div className="text-3xl font-extrabold text-orange-500">{t.landing.stats.formats}</div>
-                  <div className="text-sm text-gray-500 mt-1">{t.landing.stats.formatsDesc}</div>
-                </div>
-                <div className="w-px bg-gray-200" />
-                <div>
-                  <div className="text-3xl font-extrabold text-orange-500">{t.landing.stats.speed}</div>
-                  <div className="text-sm text-gray-500 mt-1">{t.landing.stats.speedDesc}</div>
-                </div>
-                <div className="w-px bg-gray-200" />
-                <div>
-                  <div className="text-3xl font-extrabold text-orange-500">{t.landing.stats.languages}</div>
-                  <div className="text-sm text-gray-500 mt-1">{t.landing.stats.languagesDesc}</div>
-                </div>
+              <div className="mt-8 flex items-center gap-6 sm:gap-8">
+                {[
+                  { value: t.landing.stats.formats, label: t.landing.stats.formatsDesc },
+                  { value: t.landing.stats.speed, label: t.landing.stats.speedDesc },
+                  { value: t.landing.stats.languages, label: t.landing.stats.languagesDesc }
+                ].map((stat, i) => (
+                  <div key={i} className="flex items-center gap-6 sm:gap-8">
+                    {i > 0 && <div className="w-px h-10 bg-gray-200" />}
+                    <div>
+                      <div className="text-2xl sm:text-3xl font-extrabold text-gray-900">{stat.value}</div>
+                      <div className="text-xs sm:text-sm text-gray-400 mt-0.5">{stat.label}</div>
+                    </div>
+                  </div>
+                ))}
               </div>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3">
+              {/* CTA */}
+              <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <Link
                   to="/register"
-                  className="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-orange-500 rounded-lg hover:bg-orange-600 transition-colors shadow-sm"
+                  className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-orange-500 rounded-xl hover:bg-orange-600 transition-colors shadow-lg shadow-orange-500/20"
                 >
                   {t.landing.hero.cta}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
                 <Link
                   to="/join-team"
-                  className="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="inline-flex items-center justify-center px-6 py-4 text-base font-medium text-gray-600 hover:text-gray-900 transition-colors"
                 >
                   <UserPlus className="mr-2 h-5 w-5" />
                   {language === 'fr' ? 'Rejoindre une équipe' : 'Join a team'}
                 </Link>
               </div>
-            </div>
 
-            {/* Right Content - App Preview */}
-            <div className="hidden lg:block relative">
-              <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 relative z-10">
-                {/* App header */}
-                <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-100">
-                  <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center">
-                    <PenTool className="h-5 w-5 text-white" />
-                  </div>
-                  <div>
-                    <div className="text-sm font-semibold text-gray-900">AI Content Polisher</div>
-                    <div className="text-xs text-gray-400">{t.polisher.generating}</div>
-                  </div>
-                </div>
-
-                {/* Skeleton content */}
-                <div className="space-y-4 mb-6">
-                  <div className="h-3 bg-gray-100 rounded-full w-full" />
-                  <div className="h-3 bg-gray-100 rounded-full w-[85%]" />
-                  <div className="h-3 bg-gray-100 rounded-full w-[70%]" />
-                  <div className="h-3 bg-gray-100 rounded-full w-[55%]" />
-                </div>
-
-                {/* Platforms row */}
-                <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
-                  {formats.map((f, i) => (
-                    <div
-                      key={i}
-                      className="w-9 h-9 rounded-lg flex items-center justify-center"
-                      style={{ backgroundColor: f.color }}
-                    >
-                      <f.icon className="w-4 h-4 text-white" />
+              {/* Social proof */}
+              <div className="mt-8 flex items-center gap-4">
+                {/* Avatar stack */}
+                <div className="flex -space-x-2">
+                  {['bg-blue-500', 'bg-emerald-500', 'bg-orange-500', 'bg-pink-500', 'bg-violet-500'].map((bg, i) => (
+                    <div key={i} className={`w-8 h-8 rounded-full ${bg} border-2 border-white flex items-center justify-center text-white text-xs font-bold`}>
+                      {['S', 'T', 'J', 'M', 'L'][i]}
                     </div>
                   ))}
                 </div>
+                <div>
+                  <div className="flex items-center gap-0.5">
+                    {[1,2,3,4,5].map(i => (
+                      <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                  <p className="text-sm text-gray-500 mt-0.5">
+                    {language === 'fr' ? 'Aucune carte de crédit requise' : 'No credit card required'}
+                  </p>
+                </div>
               </div>
-              {/* Background decoration */}
-              <div className="absolute -top-8 -right-8 w-72 h-72 bg-orange-100 rounded-full opacity-60 -z-0" />
-              <div className="absolute -bottom-6 -left-6 w-48 h-48 bg-blue-50 rounded-full opacity-60 -z-0" />
+            </div>
+
+            {/* Right - App preview */}
+            <div className="hidden lg:block relative">
+              <div className="bg-white rounded-2xl shadow-2xl border border-gray-200/60 p-8 relative z-10">
+                <div className="flex items-center gap-3 mb-6 pb-5 border-b border-gray-100">
+                  <div className="w-11 h-11 rounded-xl bg-orange-500 flex items-center justify-center">
+                    <PenTool className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-gray-900">AI Content Polisher</div>
+                    <div className="text-xs text-gray-400">{t.polisher.generating}</div>
+                  </div>
+                  <div className="ml-auto flex gap-1.5">
+                    <div className="w-3 h-3 rounded-full bg-gray-200" />
+                    <div className="w-3 h-3 rounded-full bg-gray-200" />
+                    <div className="w-3 h-3 rounded-full bg-gray-200" />
+                  </div>
+                </div>
+
+                {/* Fake content lines */}
+                <div className="space-y-3 mb-6">
+                  <div className="h-2.5 bg-gray-100 rounded-full w-full" />
+                  <div className="h-2.5 bg-gray-100 rounded-full w-[92%]" />
+                  <div className="h-2.5 bg-gray-100 rounded-full w-[78%]" />
+                </div>
+
+                {/* Fake generated cards */}
+                <div className="grid grid-cols-2 gap-3 mb-6">
+                  {[
+                    { icon: Linkedin, label: 'LinkedIn', color: '#0A66C2' },
+                    { icon: Instagram, label: 'Instagram', color: '#E4405F' },
+                    { icon: Video, label: 'TikTok', color: '#000' },
+                    { icon: Twitter, label: 'Twitter', color: '#000' }
+                  ].map((p, i) => (
+                    <div key={i} className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
+                      <div className="w-7 h-7 rounded flex items-center justify-center" style={{ backgroundColor: p.color }}>
+                        <p.icon className="w-3.5 h-3.5 text-white" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-semibold text-gray-700">{p.label}</div>
+                        <div className="h-1.5 bg-gray-200 rounded-full w-12 mt-1" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Fake button */}
+                <div className="h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+                  <span className="text-white text-sm font-semibold">{language === 'fr' ? 'Copier le contenu' : 'Copy content'}</span>
+                </div>
+              </div>
+
+              {/* Background shapes */}
+              <div className="absolute -top-10 -right-10 w-80 h-80 bg-orange-50 rounded-full -z-0" />
+              <div className="absolute -bottom-8 -left-8 w-56 h-56 bg-blue-50 rounded-full -z-0" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Platforms Strip */}
-      <section className="py-12 bg-gray-50 border-y border-gray-100">
+      {/* ==================== PLATFORMS STRIP ==================== */}
+      <section className="py-10 border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-sm font-medium text-gray-400 uppercase tracking-wider mb-8">
-            {t.landing.formats.title}
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-10">
             {formats.map((format, idx) => (
-              <div
-                key={idx}
-                className="flex items-center gap-3 bg-white px-5 py-3 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
-              >
+              <div key={idx} className="flex items-center gap-2.5 text-gray-400 hover:text-gray-600 transition-colors">
                 <div
-                  className="w-10 h-10 rounded-lg flex items-center justify-center"
+                  className="w-8 h-8 rounded-lg flex items-center justify-center opacity-80"
                   style={{ backgroundColor: format.color }}
                 >
-                  <format.icon className="h-5 w-5 text-white" />
+                  <format.icon className="h-4 w-4 text-white" />
                 </div>
-                <span className="text-sm font-semibold text-gray-900">{format.name}</span>
+                <span className="text-sm font-medium">{format.name}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="py-20 lg:py-28">
+      {/* ==================== HOW IT WORKS ==================== */}
+      <section className="py-24 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
+          <div className="max-w-2xl mx-auto text-center mb-16">
+            <p className="text-sm font-semibold text-orange-500 uppercase tracking-wider mb-3">
+              {language === 'fr' ? 'Comment ça marche' : 'How it works'}
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
               {t.landing.howItWorks.title}
             </h2>
-            <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+            <p className="mt-4 text-lg text-gray-500">
               {t.landing.howItWorks.subtitle}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-10">
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
             {[
-              {
-                step: '1',
-                title: t.landing.howItWorks.step1Title,
-                desc: t.landing.howItWorks.step1Desc,
-                icon: FileText,
-                color: 'bg-orange-500'
-              },
-              {
-                step: '2',
-                title: t.landing.howItWorks.step2Title,
-                desc: t.landing.howItWorks.step2Desc,
-                icon: Target,
-                color: 'bg-blue-600'
-              },
-              {
-                step: '3',
-                title: t.landing.howItWorks.step3Title,
-                desc: t.landing.howItWorks.step3Desc,
-                icon: Zap,
-                color: 'bg-emerald-500'
-              }
+              { step: '1', title: t.landing.howItWorks.step1Title, desc: t.landing.howItWorks.step1Desc, icon: FileText, color: 'bg-orange-500' },
+              { step: '2', title: t.landing.howItWorks.step2Title, desc: t.landing.howItWorks.step2Desc, icon: Target, color: 'bg-blue-600' },
+              { step: '3', title: t.landing.howItWorks.step3Title, desc: t.landing.howItWorks.step3Desc, icon: Zap, color: 'bg-emerald-500' }
             ].map((item, idx) => (
-              <div key={idx} className="text-center">
+              <div key={idx} className="relative text-center group">
+                {/* Connector line */}
+                {idx < 2 && (
+                  <div className="hidden md:block absolute top-8 left-[60%] w-[80%] border-t-2 border-dashed border-gray-200" />
+                )}
                 <div className="relative inline-flex mb-6">
-                  <div className={`w-16 h-16 ${item.color} rounded-2xl flex items-center justify-center shadow-lg`}>
-                    <item.icon className="h-8 w-8 text-white" />
+                  <div className={`w-16 h-16 ${item.color} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform`}>
+                    <item.icon className="h-7 w-7 text-white" />
                   </div>
-                  <div className="absolute -top-2 -right-2 w-7 h-7 bg-gray-900 text-white rounded-full flex items-center justify-center text-xs font-bold">
+                  <div className="absolute -top-1.5 -right-1.5 w-7 h-7 bg-white border-2 border-gray-200 text-gray-900 rounded-full flex items-center justify-center text-xs font-bold shadow-sm">
                     {item.step}
                   </div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
-                <p className="text-gray-500 leading-relaxed">{item.desc}</p>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
+                <p className="text-gray-500 leading-relaxed max-w-xs mx-auto">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="py-20 lg:py-28 bg-gray-50">
+      {/* ==================== FEATURES ==================== */}
+      <section className="py-24 lg:py-32 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
+          <div className="max-w-2xl mx-auto text-center mb-16">
+            <p className="text-sm font-semibold text-orange-500 uppercase tracking-wider mb-3">
+              {language === 'fr' ? 'Fonctionnalités' : 'Features'}
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
               {t.landing.features.title}
             </h2>
-            <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+            <p className="mt-4 text-lg text-gray-500">
               {t.landing.features.subtitle}
             </p>
           </div>
 
           <div className="grid sm:grid-cols-2 gap-6">
             {[
-              { icon: Zap, title: t.landing.features.feature1Title, desc: t.landing.features.feature1Desc, color: 'text-orange-500', bg: 'bg-orange-50' },
-              { icon: Target, title: t.landing.features.feature2Title, desc: t.landing.features.feature2Desc, color: 'text-blue-600', bg: 'bg-blue-50' },
-              { icon: Layers, title: t.landing.features.feature3Title, desc: t.landing.features.feature3Desc, color: 'text-emerald-500', bg: 'bg-emerald-50' },
-              { icon: FileText, title: t.landing.features.feature4Title, desc: t.landing.features.feature4Desc, color: 'text-violet-500', bg: 'bg-violet-50' }
+              { icon: Zap, title: t.landing.features.feature1Title, desc: t.landing.features.feature1Desc, color: 'text-orange-500', bg: 'bg-orange-50', border: 'border-orange-100' },
+              { icon: Target, title: t.landing.features.feature2Title, desc: t.landing.features.feature2Desc, color: 'text-blue-600', bg: 'bg-blue-50', border: 'border-blue-100' },
+              { icon: Layers, title: t.landing.features.feature3Title, desc: t.landing.features.feature3Desc, color: 'text-emerald-500', bg: 'bg-emerald-50', border: 'border-emerald-100' },
+              { icon: Shield, title: t.landing.features.feature4Title, desc: t.landing.features.feature4Desc, color: 'text-violet-500', bg: 'bg-violet-50', border: 'border-violet-100' }
             ].map((feature, idx) => (
-              <div
-                key={idx}
-                className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className={`w-14 h-14 ${feature.bg} rounded-xl flex items-center justify-center mb-5`}>
-                  <feature.icon className={`h-7 w-7 ${feature.color}`} />
+              <div key={idx} className="bg-white rounded-2xl p-8 border border-gray-100 hover:border-gray-200 shadow-sm hover:shadow-md transition-all">
+                <div className={`w-12 h-12 ${feature.bg} border ${feature.border} rounded-xl flex items-center justify-center mb-5`}>
+                  <feature.icon className={`h-6 w-6 ${feature.color}`} />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-500 leading-relaxed">{feature.desc}</p>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">{feature.title}</h3>
+                <p className="text-gray-500 leading-relaxed text-[0.95rem]">{feature.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Formats Details */}
-      <section className="py-20 lg:py-28">
+      {/* ==================== FORMATS DETAIL ==================== */}
+      <section className="py-24 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
+          <div className="max-w-2xl mx-auto text-center mb-16">
+            <p className="text-sm font-semibold text-orange-500 uppercase tracking-wider mb-3">
+              {language === 'fr' ? '6 plateformes' : '6 platforms'}
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
               {t.landing.formats.subtitle}
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
               { name: 'LinkedIn Post', icon: Linkedin, color: '#0A66C2', desc: t.landing.formats.linkedin },
               { name: 'Instagram Caption', icon: Instagram, color: '#E4405F', desc: t.landing.formats.instagram },
@@ -332,15 +371,15 @@ function LandingPage() {
               { name: 'Email Pro', icon: Mail, color: '#EA4335', desc: t.landing.formats.email },
               { name: 'Publicité', icon: Megaphone, color: '#F59E0B', desc: t.landing.formats.copywriting }
             ].map((format, idx) => (
-              <div key={idx} className="flex gap-4 p-6 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+              <div key={idx} className="flex gap-4 p-5 bg-white rounded-xl border border-gray-100 hover:border-gray-200 shadow-sm hover:shadow-md transition-all">
                 <div
-                  className="w-12 h-12 rounded-xl flex-shrink-0 flex items-center justify-center"
+                  className="w-11 h-11 rounded-lg flex-shrink-0 flex items-center justify-center"
                   style={{ backgroundColor: format.color }}
                 >
-                  <format.icon className="h-6 w-6 text-white" />
+                  <format.icon className="h-5 w-5 text-white" />
                 </div>
-                <div>
-                  <h3 className="font-bold text-gray-900 mb-1">{format.name}</h3>
+                <div className="min-w-0">
+                  <h3 className="font-bold text-gray-900 mb-0.5">{format.name}</h3>
                   <p className="text-sm text-gray-500 leading-relaxed">{format.desc}</p>
                 </div>
               </div>
@@ -349,10 +388,51 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section id="faq" className="py-20 lg:py-28 bg-gray-50">
+      {/* ==================== TESTIMONIALS ==================== */}
+      <section className="py-24 lg:py-32 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mx-auto text-center mb-16">
+            <p className="text-sm font-semibold text-orange-500 uppercase tracking-wider mb-3">
+              {language === 'fr' ? 'Témoignages' : 'Testimonials'}
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
+              {language === 'fr' ? "Ce qu'en pensent nos utilisateurs" : 'What our users think'}
+            </h2>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {testimonials.map((t, idx) => (
+              <div key={idx} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                {/* Stars */}
+                <div className="flex gap-0.5 mb-4">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`h-4 w-4 ${i < t.rating ? 'fill-yellow-400 text-yellow-400' : 'fill-gray-200 text-gray-200'}`}
+                    />
+                  ))}
+                </div>
+                <p className="text-gray-600 text-[0.95rem] leading-relaxed mb-5">"{t.text}"</p>
+                <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
+                  <div className="w-9 h-9 rounded-full bg-gray-900 flex items-center justify-center text-white text-sm font-bold">
+                    {t.name.charAt(0)}
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-gray-900">{t.name}</div>
+                    <div className="text-xs text-gray-400">{t.role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== FAQ ==================== */}
+      <section id="faq" className="py-24 lg:py-32">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="max-w-2xl mx-auto text-center mb-14">
+            <p className="text-sm font-semibold text-orange-500 uppercase tracking-wider mb-3">FAQ</p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
               {faq.title}
             </h2>
@@ -361,34 +441,17 @@ function LandingPage() {
           <div className="space-y-3">
             {faq.questions.map((item, index) => {
               const isOpen = openFaq === index;
-
               return (
-                <div
-                  key={index}
-                  className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden"
-                >
+                <div key={index} className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
                   <button
                     onClick={() => toggleFaq(index)}
-                    className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                    className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50/50 transition-colors"
                   >
-                    <span className="font-semibold text-gray-900 pr-8">
-                      {item.q}
-                    </span>
-                    <ChevronDown
-                      className={`w-5 h-5 text-orange-500 flex-shrink-0 transition-transform duration-200 ${
-                        isOpen ? 'rotate-180' : ''
-                      }`}
-                    />
+                    <span className="font-semibold text-gray-900 pr-8 text-[0.95rem]">{item.q}</span>
+                    <ChevronDown className={`w-5 h-5 text-orange-500 flex-shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
                   </button>
-
-                  <div
-                    className={`overflow-hidden transition-all duration-200 ${
-                      isOpen ? 'max-h-[500px]' : 'max-h-0'
-                    }`}
-                  >
-                    <div className="px-6 pb-5 text-gray-500 leading-relaxed">
-                      {item.a}
-                    </div>
+                  <div className={`overflow-hidden transition-all duration-200 ${isOpen ? 'max-h-[600px]' : 'max-h-0'}`}>
+                    <div className="px-6 pb-6 text-gray-500 leading-relaxed text-[0.95rem]">{item.a}</div>
                   </div>
                 </div>
               );
@@ -397,44 +460,36 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="py-20 lg:py-28">
+      {/* ==================== FINAL CTA ==================== */}
+      <section className="py-24 lg:py-32 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gray-900 rounded-3xl px-8 sm:px-12 py-16 text-center relative overflow-hidden">
-            {/* Decoration */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full -mr-20 -mt-20" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-orange-500/10 rounded-full -ml-16 -mb-16" />
+          <div className="bg-gray-900 rounded-3xl px-8 sm:px-14 py-16 sm:py-20 text-center relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-72 h-72 bg-orange-500/10 rounded-full -mr-24 -mt-24" />
+            <div className="absolute bottom-0 left-0 w-56 h-56 bg-orange-500/10 rounded-full -ml-20 -mb-20" />
 
             <div className="relative">
               <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
                 {t.landing.finalCta.title}
               </h2>
-
-              <p className="text-lg text-gray-400 mb-8 max-w-xl mx-auto">
+              <p className="text-lg text-gray-400 mb-10 max-w-xl mx-auto">
                 {t.landing.finalCta.subtitle}
               </p>
 
               <Link
                 to="/register"
-                className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-gray-900 bg-orange-400 rounded-lg hover:bg-orange-500 transition-colors shadow-lg"
+                className="inline-flex items-center justify-center px-10 py-4 text-base font-semibold text-gray-900 bg-orange-400 rounded-xl hover:bg-orange-300 transition-colors shadow-lg"
               >
                 {t.landing.finalCta.cta}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
 
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-gray-400 text-sm">
-                <div className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-orange-400" />
-                  <span>{t.landing.finalCta.feature1}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-orange-400" />
-                  <span>{t.landing.finalCta.feature2}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-orange-400" />
-                  <span>{t.landing.finalCta.feature3}</span>
-                </div>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-gray-400 text-sm">
+                {[t.landing.finalCta.feature1, t.landing.finalCta.feature2, t.landing.finalCta.feature3].map((feat, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-orange-400" />
+                    <span>{feat}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
