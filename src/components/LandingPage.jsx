@@ -4,12 +4,9 @@ import { useTranslation } from '../locales/translations';
 import {
   Zap, Target, ArrowRight, Check,
   FileText, Mail, Video, Linkedin, Instagram,
-  Twitter, Megaphone, ChevronDown, UserPlus, Layers
+  Twitter, Megaphone, ChevronDown, UserPlus, Layers, PenTool
 } from 'lucide-react';
 import { useState } from 'react';
-import { Button } from './ui/button';
-import { Card, CardContent } from './ui/card';
-import { Badge } from './ui/badge';
 
 function LandingPage() {
   const { language } = useLanguage();
@@ -92,304 +89,271 @@ function LandingPage() {
   const faq = faqContent[language] || faqContent.fr;
 
   const formats = [
-    {
-      name: 'LinkedIn Post',
-      icon: Linkedin,
-      color: 'bg-[#0A66C2]',
-      desc: t.landing.formats.linkedin
-    },
-    {
-      name: 'Instagram Caption',
-      icon: Instagram,
-      color: 'bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#F77737]',
-      desc: t.landing.formats.instagram
-    },
-    {
-      name: 'Script TikTok',
-      icon: Video,
-      color: 'bg-black',
-      desc: t.landing.formats.tiktok
-    },
-    {
-      name: 'Tweet / Thread',
-      icon: Twitter,
-      color: 'bg-black',
-      desc: t.landing.formats.twitter
-    },
-    {
-      name: 'Email Pro',
-      icon: Mail,
-      color: 'bg-blue-600',
-      desc: t.landing.formats.email
-    },
-    {
-      name: 'Publicité',
-      icon: Megaphone,
-      color: 'bg-amber-500',
-      desc: t.landing.formats.copywriting
-    }
-  ];
-
-  const features = [
-    {
-      icon: Zap,
-      title: t.landing.features.feature1Title,
-      description: t.landing.features.feature1Desc,
-      iconColor: 'text-amber-500'
-    },
-    {
-      icon: Target,
-      title: t.landing.features.feature2Title,
-      description: t.landing.features.feature2Desc,
-      iconColor: 'text-blue-600'
-    },
-    {
-      icon: Layers,
-      title: t.landing.features.feature3Title,
-      description: t.landing.features.feature3Desc,
-      iconColor: 'text-emerald-500'
-    },
-    {
-      icon: FileText,
-      title: t.landing.features.feature4Title,
-      description: t.landing.features.feature4Desc,
-      iconColor: 'text-violet-500'
-    }
+    { name: 'LinkedIn', icon: Linkedin, color: '#0A66C2' },
+    { name: 'Instagram', icon: Instagram, color: '#E4405F' },
+    { name: 'TikTok', icon: Video, color: '#000000' },
+    { name: 'Twitter / X', icon: Twitter, color: '#000000' },
+    { name: 'Email', icon: Mail, color: '#EA4335' },
+    { name: 'Publicité', icon: Megaphone, color: '#F59E0B' }
   ];
 
   return (
-    <div className="bg-background">
+    <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center">
-        {/* Subtle background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent dark:from-blue-950/20 dark:to-transparent" />
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div className="space-y-8">
-            <Badge className="bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 hover:bg-blue-100">
-              {t.landing.hero.badge}
-            </Badge>
-
-            {/* Main Heading */}
+      <section className="relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-28">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left Content */}
             <div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-tight mb-6">
-                {t.landing.hero.title1}
-                <br />
-                <span className="text-blue-600 dark:text-blue-400">
-                  {t.landing.hero.title2}
-                </span>
-                <br />
+              {/* Small tag */}
+              <div className="inline-flex items-center gap-2 bg-orange-50 text-orange-600 text-sm font-medium px-4 py-2 rounded-full mb-8">
+                <Zap className="h-4 w-4" />
+                {t.landing.hero.badge}
+              </div>
+
+              <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold text-gray-900 leading-[1.1] tracking-tight mb-6">
+                {t.landing.hero.title1}{' '}
+                <span className="text-orange-500">{t.landing.hero.title2}</span>{' '}
                 {t.landing.hero.title3}
               </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
-                {t.landing.hero.subtitle}
-                <span className="font-medium text-foreground">{t.landing.hero.subtitleBold}</span>
-              </p>
-            </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button asChild size="lg" className="text-base bg-blue-600 hover:bg-blue-700">
-                <Link to="/register">
+              <p className="text-lg text-gray-500 leading-relaxed mb-8 max-w-lg">
+                {t.landing.hero.subtitle}
+                <span className="text-gray-900 font-medium">{t.landing.hero.subtitleBold}</span>
+              </p>
+
+              {/* Stats row */}
+              <div className="flex gap-8 mb-8">
+                <div>
+                  <div className="text-3xl font-extrabold text-orange-500">{t.landing.stats.formats}</div>
+                  <div className="text-sm text-gray-500 mt-1">{t.landing.stats.formatsDesc}</div>
+                </div>
+                <div className="w-px bg-gray-200" />
+                <div>
+                  <div className="text-3xl font-extrabold text-orange-500">{t.landing.stats.speed}</div>
+                  <div className="text-sm text-gray-500 mt-1">{t.landing.stats.speedDesc}</div>
+                </div>
+                <div className="w-px bg-gray-200" />
+                <div>
+                  <div className="text-3xl font-extrabold text-orange-500">{t.landing.stats.languages}</div>
+                  <div className="text-sm text-gray-500 mt-1">{t.landing.stats.languagesDesc}</div>
+                </div>
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link
+                  to="/register"
+                  className="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-orange-500 rounded-lg hover:bg-orange-600 transition-colors shadow-sm"
+                >
                   {t.landing.hero.cta}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="text-base">
-                <Link to="/join-team">
+                <Link
+                  to="/join-team"
+                  className="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                >
                   <UserPlus className="mr-2 h-5 w-5" />
-                  Rejoindre une équipe
+                  {language === 'fr' ? 'Rejoindre une équipe' : 'Join a team'}
                 </Link>
-              </Button>
+              </div>
             </div>
-          </div>
 
-          {/* Right Content - Preview Card */}
-          <div className="hidden lg:block">
-            <Card className="p-8 shadow-xl border-slate-200 dark:border-slate-700">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center">
-                  <FileText className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <div className="font-semibold text-foreground">AI Content Polisher</div>
-                  <div className="text-sm text-muted-foreground">{t.polisher.generating}</div>
-                </div>
-              </div>
-
-              <div className="space-y-3 mb-8">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="h-3 bg-slate-100 dark:bg-slate-800 rounded" style={{ width: `${100 - i * 10}%` }} />
-                ))}
-              </div>
-
-              <div className="pt-6 border-t border-border flex items-center justify-between">
-                <div className="flex gap-2">
-                  <div className="w-8 h-8 bg-[#0A66C2] rounded flex items-center justify-center">
-                    <Linkedin className="w-4 h-4 text-white" />
+            {/* Right Content - App Preview */}
+            <div className="hidden lg:block relative">
+              <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 relative z-10">
+                {/* App header */}
+                <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-100">
+                  <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center">
+                    <PenTool className="h-5 w-5 text-white" />
                   </div>
-                  <div className="w-8 h-8 bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#F77737] rounded flex items-center justify-center">
-                    <Instagram className="w-4 h-4 text-white" />
-                  </div>
-                  <div className="w-8 h-8 bg-black rounded flex items-center justify-center">
-                    <Video className="w-4 h-4 text-white" />
-                  </div>
-                  <div className="w-8 h-8 bg-black rounded flex items-center justify-center">
-                    <Twitter className="w-4 h-4 text-white" />
+                  <div>
+                    <div className="text-sm font-semibold text-gray-900">AI Content Polisher</div>
+                    <div className="text-xs text-gray-400">{t.polisher.generating}</div>
                   </div>
                 </div>
-                <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">
-                  {t.landing.stats.formats}
-                </Badge>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
 
-      {/* Stats Bar */}
-      <section className="py-16 bg-slate-50 dark:bg-slate-900/50 border-y border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="space-y-2">
-              <div className="text-4xl font-bold text-blue-600 dark:text-blue-400">
-                {t.landing.stats.formats}
+                {/* Skeleton content */}
+                <div className="space-y-4 mb-6">
+                  <div className="h-3 bg-gray-100 rounded-full w-full" />
+                  <div className="h-3 bg-gray-100 rounded-full w-[85%]" />
+                  <div className="h-3 bg-gray-100 rounded-full w-[70%]" />
+                  <div className="h-3 bg-gray-100 rounded-full w-[55%]" />
+                </div>
+
+                {/* Platforms row */}
+                <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
+                  {formats.map((f, i) => (
+                    <div
+                      key={i}
+                      className="w-9 h-9 rounded-lg flex items-center justify-center"
+                      style={{ backgroundColor: f.color }}
+                    >
+                      <f.icon className="w-4 h-4 text-white" />
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="text-muted-foreground">{t.landing.stats.formatsDesc}</div>
-            </div>
-            <div className="space-y-2">
-              <div className="text-4xl font-bold text-blue-600 dark:text-blue-400">
-                {t.landing.stats.languages}
-              </div>
-              <div className="text-muted-foreground">{t.landing.stats.languagesDesc}</div>
-            </div>
-            <div className="space-y-2">
-              <div className="text-4xl font-bold text-blue-600 dark:text-blue-400">
-                {t.landing.stats.speed}
-              </div>
-              <div className="text-muted-foreground">{t.landing.stats.speedDesc}</div>
+              {/* Background decoration */}
+              <div className="absolute -top-8 -right-8 w-72 h-72 bg-orange-100 rounded-full opacity-60 -z-0" />
+              <div className="absolute -bottom-6 -left-6 w-48 h-48 bg-blue-50 rounded-full opacity-60 -z-0" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Formats Grid */}
-      <section className="py-20">
+      {/* Platforms Strip */}
+      <section className="py-12 bg-gray-50 border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              {t.landing.formats.title}
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              {t.landing.formats.subtitle}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <p className="text-center text-sm font-medium text-gray-400 uppercase tracking-wider mb-8">
+            {t.landing.formats.title}
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
             {formats.map((format, idx) => (
-              <Card key={idx} className="p-6 hover:shadow-lg transition-shadow border-slate-200 dark:border-slate-700">
-                <CardContent className="p-0">
-                  <div className={`w-12 h-12 ${format.color} rounded-xl flex items-center justify-center mb-4`}>
-                    <format.icon className="h-6 w-6 text-white" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">{format.name}</h3>
-                  <p className="text-sm text-muted-foreground">{format.desc}</p>
-                </CardContent>
-              </Card>
+              <div
+                key={idx}
+                className="flex items-center gap-3 bg-white px-5 py-3 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div
+                  className="w-10 h-10 rounded-lg flex items-center justify-center"
+                  style={{ backgroundColor: format.color }}
+                >
+                  <format.icon className="h-5 w-5 text-white" />
+                </div>
+                <span className="text-sm font-semibold text-gray-900">{format.name}</span>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* How It Works */}
-      <section className="py-20 bg-slate-50 dark:bg-slate-900/50">
+      <section className="py-20 lg:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
               {t.landing.howItWorks.title}
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-gray-500 max-w-2xl mx-auto">
               {t.landing.howItWorks.subtitle}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-10">
             {[
               {
-                step: '01',
+                step: '1',
                 title: t.landing.howItWorks.step1Title,
                 desc: t.landing.howItWorks.step1Desc,
                 icon: FileText,
-                color: 'bg-blue-600'
+                color: 'bg-orange-500'
               },
               {
-                step: '02',
+                step: '2',
                 title: t.landing.howItWorks.step2Title,
                 desc: t.landing.howItWorks.step2Desc,
                 icon: Target,
-                color: 'bg-violet-600'
+                color: 'bg-blue-600'
               },
               {
-                step: '03',
+                step: '3',
                 title: t.landing.howItWorks.step3Title,
                 desc: t.landing.howItWorks.step3Desc,
                 icon: Zap,
-                color: 'bg-emerald-600'
+                color: 'bg-emerald-500'
               }
             ].map((item, idx) => (
-              <Card key={idx} className="p-8 relative border-slate-200 dark:border-slate-700">
-                <div className="absolute -top-3 left-6">
-                  <Badge className={`${item.color} text-white text-sm font-mono`}>
-                    {item.step}
-                  </Badge>
-                </div>
-                <CardContent className="p-0 pt-4">
-                  <div className={`w-12 h-12 ${item.color} rounded-xl flex items-center justify-center mb-6`}>
-                    <item.icon className="h-6 w-6 text-white" />
+              <div key={idx} className="text-center">
+                <div className="relative inline-flex mb-6">
+                  <div className={`w-16 h-16 ${item.color} rounded-2xl flex items-center justify-center shadow-lg`}>
+                    <item.icon className="h-8 w-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-3">{item.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
-                </CardContent>
-              </Card>
+                  <div className="absolute -top-2 -right-2 w-7 h-7 bg-gray-900 text-white rounded-full flex items-center justify-center text-xs font-bold">
+                    {item.step}
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
+                <p className="text-gray-500 leading-relaxed">{item.desc}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Features */}
-      <section className="py-20">
+      <section className="py-20 lg:py-28 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
               {t.landing.features.title}
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-gray-500 max-w-2xl mx-auto">
               {t.landing.features.subtitle}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {features.map((feature, idx) => (
-              <Card key={idx} className="p-8 hover:shadow-lg transition-shadow border-slate-200 dark:border-slate-700">
-                <CardContent className="p-0">
-                  <div className="w-14 h-14 bg-slate-100 dark:bg-slate-800 rounded-xl flex items-center justify-center mb-6">
-                    <feature.icon className={`h-7 w-7 ${feature.iconColor}`} />
-                  </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-3">{feature.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
-                </CardContent>
-              </Card>
+          <div className="grid sm:grid-cols-2 gap-6">
+            {[
+              { icon: Zap, title: t.landing.features.feature1Title, desc: t.landing.features.feature1Desc, color: 'text-orange-500', bg: 'bg-orange-50' },
+              { icon: Target, title: t.landing.features.feature2Title, desc: t.landing.features.feature2Desc, color: 'text-blue-600', bg: 'bg-blue-50' },
+              { icon: Layers, title: t.landing.features.feature3Title, desc: t.landing.features.feature3Desc, color: 'text-emerald-500', bg: 'bg-emerald-50' },
+              { icon: FileText, title: t.landing.features.feature4Title, desc: t.landing.features.feature4Desc, color: 'text-violet-500', bg: 'bg-violet-50' }
+            ].map((feature, idx) => (
+              <div
+                key={idx}
+                className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className={`w-14 h-14 ${feature.bg} rounded-xl flex items-center justify-center mb-5`}>
+                  <feature.icon className={`h-7 w-7 ${feature.color}`} />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{feature.title}</h3>
+                <p className="text-gray-500 leading-relaxed">{feature.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Formats Details */}
+      <section className="py-20 lg:py-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
+              {t.landing.formats.subtitle}
+            </h2>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { name: 'LinkedIn Post', icon: Linkedin, color: '#0A66C2', desc: t.landing.formats.linkedin },
+              { name: 'Instagram Caption', icon: Instagram, color: '#E4405F', desc: t.landing.formats.instagram },
+              { name: 'Script TikTok', icon: Video, color: '#000000', desc: t.landing.formats.tiktok },
+              { name: 'Tweet / Thread', icon: Twitter, color: '#000000', desc: t.landing.formats.twitter },
+              { name: 'Email Pro', icon: Mail, color: '#EA4335', desc: t.landing.formats.email },
+              { name: 'Publicité', icon: Megaphone, color: '#F59E0B', desc: t.landing.formats.copywriting }
+            ].map((format, idx) => (
+              <div key={idx} className="flex gap-4 p-6 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                <div
+                  className="w-12 h-12 rounded-xl flex-shrink-0 flex items-center justify-center"
+                  style={{ backgroundColor: format.color }}
+                >
+                  <format.icon className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-1">{format.name}</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed">{format.desc}</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-20 bg-slate-50 dark:bg-slate-900/50">
+      <section id="faq" className="py-20 lg:py-28 bg-gray-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
               {faq.title}
             </h2>
           </div>
@@ -399,16 +363,19 @@ function LandingPage() {
               const isOpen = openFaq === index;
 
               return (
-                <Card key={index} className="overflow-hidden border-slate-200 dark:border-slate-700">
+                <div
+                  key={index}
+                  className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden"
+                >
                   <button
                     onClick={() => toggleFaq(index)}
-                    className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                    className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
                   >
-                    <span className="font-medium text-foreground pr-8">
+                    <span className="font-semibold text-gray-900 pr-8">
                       {item.q}
                     </span>
                     <ChevronDown
-                      className={`w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 transition-transform ${
+                      className={`w-5 h-5 text-orange-500 flex-shrink-0 transition-transform duration-200 ${
                         isOpen ? 'rotate-180' : ''
                       }`}
                     />
@@ -419,11 +386,11 @@ function LandingPage() {
                       isOpen ? 'max-h-[500px]' : 'max-h-0'
                     }`}
                   >
-                    <div className="px-6 pb-5 text-muted-foreground leading-relaxed">
+                    <div className="px-6 pb-5 text-gray-500 leading-relaxed">
                       {item.a}
                     </div>
                   </div>
-                </Card>
+                </div>
               );
             })}
           </div>
@@ -431,35 +398,44 @@ function LandingPage() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 bg-blue-600 dark:bg-blue-700">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            {t.landing.finalCta.title}
-          </h2>
+      <section className="py-20 lg:py-28">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gray-900 rounded-3xl px-8 sm:px-12 py-16 text-center relative overflow-hidden">
+            {/* Decoration */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full -mr-20 -mt-20" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-orange-500/10 rounded-full -ml-16 -mb-16" />
 
-          <p className="text-lg text-blue-100 mb-10 max-w-xl mx-auto">
-            {t.landing.finalCta.subtitle}
-          </p>
+            <div className="relative">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+                {t.landing.finalCta.title}
+              </h2>
 
-          <Button asChild size="lg" className="text-base bg-white text-blue-600 hover:bg-blue-50 mb-8">
-            <Link to="/register">
-              {t.landing.finalCta.cta}
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
+              <p className="text-lg text-gray-400 mb-8 max-w-xl mx-auto">
+                {t.landing.finalCta.subtitle}
+              </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-6 text-blue-100 text-sm">
-            <div className="flex items-center gap-2">
-              <Check className="h-4 w-4 text-white" />
-              <span>{t.landing.finalCta.feature1}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Check className="h-4 w-4 text-white" />
-              <span>{t.landing.finalCta.feature2}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Check className="h-4 w-4 text-white" />
-              <span>{t.landing.finalCta.feature3}</span>
+              <Link
+                to="/register"
+                className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-gray-900 bg-orange-400 rounded-lg hover:bg-orange-500 transition-colors shadow-lg"
+              >
+                {t.landing.finalCta.cta}
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-gray-400 text-sm">
+                <div className="flex items-center gap-2">
+                  <Check className="h-4 w-4 text-orange-400" />
+                  <span>{t.landing.finalCta.feature1}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="h-4 w-4 text-orange-400" />
+                  <span>{t.landing.finalCta.feature2}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="h-4 w-4 text-orange-400" />
+                  <span>{t.landing.finalCta.feature3}</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
