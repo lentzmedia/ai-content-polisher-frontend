@@ -5,7 +5,6 @@ import Navbar from './components/Navbar';
 import { getCurrentUser } from './services/api';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { ToastProvider } from './contexts/ToastContext';
-import { ThemeProvider } from './contexts/ThemeContext';
 
 // Lazy load components for code splitting
 const LandingPage = lazy(() => import('./components/LandingPage'));
@@ -97,29 +96,28 @@ function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+      <div className="min-h-screen flex items-center justify-center bg-cream">
         <div className="relative">
-          <div className="animate-spin rounded-full h-16 w-16 border-4 border-purple-200 dark:border-purple-900"></div>
-          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-purple-600 dark:border-purple-400 absolute top-0 left-0"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-4 border-terracotta/20"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-terracotta absolute top-0 left-0"></div>
         </div>
       </div>
     );
   }
 
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <ToastProvider>
-          <Router>
-            <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors">
-              <Suspense fallback={
-                <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-                  <div className="relative">
-                    <div className="animate-spin rounded-full h-16 w-16 border-4 border-purple-200 dark:border-purple-900"></div>
-                    <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-purple-600 dark:border-purple-400 absolute top-0 left-0"></div>
-                  </div>
+    <LanguageProvider>
+      <ToastProvider>
+        <Router>
+          <div className="min-h-screen bg-cream transition-colors">
+            <Suspense fallback={
+              <div className="min-h-screen flex items-center justify-center bg-cream">
+                <div className="relative">
+                  <div className="animate-spin rounded-full h-16 w-16 border-4 border-terracotta/20"></div>
+                  <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-terracotta absolute top-0 left-0"></div>
                 </div>
-              }>
+              </div>
+            }>
                 <LayoutWrapper user={user} onLogout={handleLogout}>
                   <Routes>
                     <Route
@@ -278,12 +276,11 @@ function App() {
                     />
                   </Routes>
                 </LayoutWrapper>
-              </Suspense>
-            </div>
-          </Router>
-        </ToastProvider>
-      </LanguageProvider>
-    </ThemeProvider>
+            </Suspense>
+          </div>
+        </Router>
+      </ToastProvider>
+    </LanguageProvider>
   );
 }
 
